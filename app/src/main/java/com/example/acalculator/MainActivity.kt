@@ -1,11 +1,13 @@
 package com.example.acalculator
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import net.objecthunter.exp4j.ExpressionBuilder
+import java.util.*
 
 private val TAG = MainActivity::class.java.simpleName
 
@@ -16,10 +18,32 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        makeToast(Thread.currentThread().stackTrace[2].methodName)
     }
 
     override fun onStart() {
         super.onStart()
+        makeToast(Thread.currentThread().stackTrace[2].methodName)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        makeToast(Thread.currentThread().stackTrace[2].methodName)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        makeToast(Thread.currentThread().stackTrace[2].methodName)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        makeToast(Thread.currentThread().stackTrace[2].methodName)
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        makeToast(Thread.currentThread().stackTrace[2].methodName)
     }
 
     fun onNumberButtonPressed(view: View) {
@@ -116,6 +140,13 @@ class MainActivity : AppCompatActivity() {
         hist_visor.text = history
         Log.i(TAG, "The expression result is ${text_visor.text}")
         flag = true
+    }
+
+    private fun makeToast(text: String) {
+        val actualTime = Calendar.getInstance()
+        val textToShow = "$text ${actualTime.time}"
+        Toast.makeText(this, textToShow, Toast.LENGTH_SHORT).show()
+        Log.i(TAG, textToShow)
     }
 
 }
