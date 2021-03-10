@@ -19,4 +19,5 @@
     <string name="button_multiplier">*</string>
     <string name="button_clear">c</string>
     <string name="button_erase">&lt;</string>
+    <string name="error_message">ERROR</string>
 </resources>

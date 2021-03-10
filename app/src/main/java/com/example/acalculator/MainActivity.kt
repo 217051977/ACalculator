@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
                         if (expressionParts[1] != "0") {
                             calculateResult(textVisorValue)
                         } else {
-                            text_visor.text = "ERROR"
+                            text_visor.text = getString(R.string.error_message)
                         }
                     }
                 }
@@ -104,7 +104,7 @@ class MainActivity : AppCompatActivity() {
                 s[s.lastIndex] != '-' &&
                 s[s.lastIndex] != '*' &&
                 s[s.lastIndex] != '/' &&
-                s[s.lastIndex] != '.';
+                s[s.lastIndex] != '.'
     }
 
     private fun calculateResult(s: String) {
@@ -112,7 +112,8 @@ class MainActivity : AppCompatActivity() {
         val result = expression.evaluate().toString()
         val resultParts = result.split(".")
         text_visor.text = if (resultParts[1].toInt() == 0) resultParts[0] else result
-        hist_visor.text = "$s=${text_visor.text}"
+        val history = "$s=${text_visor.text}"
+        hist_visor.text = history
         Log.i(TAG, "The expression result is ${text_visor.text}")
         flag = true
     }
