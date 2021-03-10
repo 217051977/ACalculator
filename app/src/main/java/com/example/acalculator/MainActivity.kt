@@ -144,7 +144,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun makeToast(text: String) {
         val actualTime = Calendar.getInstance()
-        val textToShow = "$text ${actualTime.time}"
+        val h = actualTime.get(Calendar.HOUR_OF_DAY)
+        val m = actualTime.get(Calendar.MINUTE)
+        val s = actualTime.get(Calendar.SECOND)
+        val textToShow = "$text $h:$m:$s"
         Toast.makeText(this, textToShow, Toast.LENGTH_SHORT).show()
         Log.i(TAG, textToShow)
     }
