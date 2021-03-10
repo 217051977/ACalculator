@@ -11,6 +11,8 @@ private val TAG = MainActivity::class.java.simpleName
 
 class MainActivity : AppCompatActivity() {
 
+    private var flag = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -36,11 +38,12 @@ class MainActivity : AppCompatActivity() {
             button_7.id,
             button_8.id,
             button_9.id -> {
-                if (textVisorValue == "0" || textVisorValue == "ERROR") {
+                if (textVisorValue == "0" || textVisorValue == "ERROR" || flag) {
                     text_visor.text = buttonValue
                 } else {
                     text_visor.append(buttonValue)
                 }
+                flag = false
             }
         }
     }
@@ -58,6 +61,7 @@ class MainActivity : AppCompatActivity() {
             button_dot.id -> {
                 if (checkForInvalidLastChar(textVisorValue)) {
                     text_visor.append(buttonValue)
+                    flag = false
                 }
             }
             button_equals.id -> {
@@ -95,20 +99,22 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun calculateResult(s: String) {
-        val expression = ExpressionBuilder(text_visor.text.toString()).build()
-        val result = expression.evaluate().toString()
-        val resultParts = result.split(".")
-        text_visor.text = if (resultParts[1].toInt() == 0) resultParts[0] else result
-        Log.i(TAG, "The expression result is ${text_visor.text}")
-    }
-
     private fun checkForInvalidLastChar(s: String) : Boolean {
         return s[s.lastIndex] != '+' &&
                 s[s.lastIndex] != '-' &&
                 s[s.lastIndex] != '*' &&
                 s[s.lastIndex] != '/' &&
                 s[s.lastIndex] != '.';
+    }
+
+    private fun calculateResult(s: String) {
+        val expression = ExpressionBuilder(text_visor.text.toString()).build()
+        val result = expression.evaluate().toString()
+        val resultParts = result.split(".")
+        text_visor.text = if (resultParts[1].toInt() == 0) resultParts[0] else result
+        hist_visor.text = "$s=${text_visor.text}"
+        Log.i(TAG, "The expression result is ${text_visor.text}")
+        flag = true
     }
 
 }

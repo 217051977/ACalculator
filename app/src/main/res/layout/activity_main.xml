@@ -13,12 +13,22 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         >
+        <TextView
+            android:id="@+id/hist_visor"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textSize="40sp"
+            android:gravity="end|bottom"
+            android:padding="16dp"
+            />
         <TextView
             android:id="@+id/text_visor"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:textSize="40sp"
             android:gravity="end|bottom"
             android:text="@string/initial_val"
@@ -186,7 +196,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:baselineAligned="false">
 
         <LinearLayout
             android:layout_width="0dp"
